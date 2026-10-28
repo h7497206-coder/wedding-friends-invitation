@@ -1,0 +1,161 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: #e7ebf2;
+  background: linear-gradient(135deg, #1b3049, #07111f);
+}
+
+.cover-page {
+  min-height: 100vh;
+  padding: 42px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.cover-heading h1 {
+  min-height: 1.2em;
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: clamp(25px, 4vw, 48px);
+  font-weight: 400;
+  letter-spacing: 5px;
+}
+
+.typing-cursor {
+  display: inline-block;
+  margin-left: 5px;
+  color: #c0cad9;
+  animation: cursorBlink 0.7s steps(2, start) infinite;
+}
+
+.typing-cursor.cursor-done {
+  animation: none;
+  opacity: 0;
+}
+
+.cover-heading p {
+  margin: 16px 0 0;
+  font-size: 12px;
+  letter-spacing: 4px;
+  line-height: 1.8;
+  color: #aebbd0;
+}
+
+.custom-card {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.custom-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 65vh;
+  object-fit: contain;
+  border-radius: 2px;
+}
+
+/* Smooth reveal for the subtitle, card, button and footer */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+  visibility: hidden;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s;
+}
+
+.cover-open {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-width: 240px;
+  padding: 17px 30px;
+  border: 1px solid #aebbd0;
+  border-radius: 40px;
+  color: #e7ebf2;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.cover-open:hover {
+  background: #e7ebf2;
+  color: #102039;
+  border-color: #e7ebf2;
+}
+
+.cover-footer {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: #aebbd0;
+}
+
+@keyframes cursorBlink {
+  to {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 600px) {
+  .cover-page {
+    padding: 30px 16px 24px;
+    gap: 22px;
+  }
+
+  .cover-heading h1 {
+    letter-spacing: 2px;
+  }
+
+  .cover-heading p {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .custom-card img {
+    max-height: 55vh;
+  }
+
+  .cover-open {
+    min-width: 220px;
+    padding: 15px 22px;
+  }
+
+  .cover-footer {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
