@@ -5,67 +5,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Walima Invitation | Abu-Bakr</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="cover.css">
 </head>
 <body>
-  <main class="invitation-page">
+  <main class="cover-page">
 
-    
-    <div class="flower-intro outer-reveal" id="flower-intro">
-      <img
-        src="assets/images/walima-flower.webp"
-        alt="Ivory flower with navy blue and gold leaves"
-      >
-      <div class="flower-divider"></div>
-    </div>
-
-
-    <header class="page-heading">
-      <h1 id="typing-heading"></h1>
-      <p class="outer-reveal" id="top-subtitle">
-        A SPECIAL DAY, A JOYFUL CELEBRATION
+    <header class="cover-heading">
+      <h1><span id="typing-heading"></span><span class="typing-cursor" aria-hidden="true">|</span></h1>
+      <p id="cover-subtitle" class="reveal-hidden">
+        A CELEBRATION OF A NEW BEGINNING
       </p>
     </header>
 
-    <section class="invitation-card outer-reveal" id="walima-card">
+    <div class="custom-card reveal-hidden" id="invitation-card">
       <img
-        class="frame-image"
-        src="assets/images/walima-frame.webp"
-        alt="Decorative navy blue and gold floral invitation frame"
+        src="assets/images/walima-card.webp"
+        alt="Walima invitation card"
       >
+    </div>
 
-      <div class="card-details">
-        <p class="card-eyebrow">WITH GREAT PLEASURE</p>
-        <h2>WALIMA INVITATION</h2>
-        <div class="gold-divider"></div>
+    <a
+      class="cover-open reveal-hidden"
+      id="open-button"
+      href="invitation.html"
+    >
+      OPEN INVITATION <span aria-hidden="true">›</span>
+    </a>
 
-        <p class="card-intro">You are cordially invited to celebrate</p>
-        <h3>Abu-Bakr <span>&amp; Mrs.</span></h3>
-
-        <div class="gold-divider"></div>
-
-        <p class="detail-label">DATE</p>
-        <p class="detail-value">Sunday, 29 November 2026</p>
-
-        <p class="detail-label">TIME</p>
-        <p class="detail-value">1:00 PM</p>
-
-        <p class="detail-label">VENUE</p>
-        <p class="detail-value">PJ Marquee Near View Hotel</p>
-
-        <a
-          class="venue-button"
-          href="https://www.google.com/maps/search/?api=1&query=PJ+Marquee+Near+View+Hotel"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          VIEW LOCATION
-        </a>
-      </div>
-    </section>
-
-    <footer class="page-footer outer-reveal" id="bottom-message">
-      YOUR PRESENCE WILL MAKE OUR DAY MORE MEMORABLE
+    <footer class="cover-footer reveal-hidden" id="cover-footer">
+      EXCLUSIVELY FOR OUR FRIENDS
     </footer>
 
   </main>
@@ -73,56 +41,55 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const heading = document.getElementById("typing-heading");
-      const flower = document.getElementById("flower-intro");
-      const subtitle = document.getElementById("top-subtitle");
-      const card = document.getElementById("walima-card");
-      const footer = document.getElementById("bottom-message");
+      const subtitle = document.getElementById("cover-subtitle");
+      const card = document.getElementById("invitation-card");
+      const button = document.getElementById("open-button");
+      const footer = document.getElementById("cover-footer");
 
-      const text = "YOU'RE CORDIALLY INVITED";
+      const headingText = "YOU'RE CORDIALLY INVITED";
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
 
-      function reveal(element) {
-        element.classList.add("is-visible");
-      }
+      const reveal = (element) => {
+        element.classList.remove("reveal-hidden");
+        element.classList.add("reveal-visible");
+      };
 
       if (reduceMotion) {
-        heading.textContent = text;
-        reveal(flower);
-        reveal(subtitle);
-        reveal(card);
-        reveal(footer);
+        heading.textContent = headingText;
+        document.querySelector(".typing-cursor").hidden = true;
+        [subtitle, card, button, footer].forEach(reveal);
         return;
       }
 
       let index = 0;
 
       function typeHeading() {
-        if (index < text.length) {
-          heading.textContent += text.charAt(index);
+        if (index < headingText.length) {
+          heading.textContent += headingText.charAt(index);
           index++;
           setTimeout(typeHeading, 75);
         } else {
-            reveal(subtitle);
+          document.querySelector(".typing-cursor").classList.add("cursor-done");
+
+          reveal(subtitle);
 
           setTimeout(() => {
             reveal(card);
 
             setTimeout(() => {
-              reveal(footer);
-            }, 1000);
-          }, 350);
+              reveal(button);
+
+              setTimeout(() => {
+                reveal(footer);
+              }, 250);
+            }, 700);
+          }, 300);
         }
       }
 
-      
-      reveal(flower);
-
-      setTimeout(() => {
-        typeHeading();
-      }, 900);
-
+      typeHeading();
     });
   </script>
 </body>
